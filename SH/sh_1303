@@ -1,0 +1,70 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+	static String[][] maps;
+	static int[] xArr = {-1,0,1,0};   //방향
+	static int[] yArr = {0,-1,0,1};
+	static boolean[][] visited;     //방문했는지 구분
+
+	static Map<String, Integer> answer = new HashMap<>();
+	static int numX= 0;
+	static int numY = 0;
+	static int count = 0;
+	
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));		
+		String str= br.readLine();
+		numX = Integer.parseInt(str.split(" ")[0]);  //값 받기
+		numY = Integer.parseInt(str.split(" ")[1]);  // 값 받기
+		
+		maps = new String[numY][numX];  
+		visited = new boolean[numY][numX];   // 초기화 false
+
+		answer.put("W",0);   // W , B 병사 위력 계산을 위해서 미리 키 설정
+		answer.put("B",0);
+
+		for(int i = 0; i<numY ; i++) {
+			str = br.readLine();
+			for(int j = 0; j < numX; j++) {
+				maps[i][j] = str.split("")[j];
+			}
+			
+		}
+//------입력----------------------------------------------------------------
+		for(int i = 0; i< numY ; i++) {
+			for(int j = 0; j<numX; j++) {
+				String check = maps[i][j];  //어떤 키워드로 시작하는지 확인하기위해
+				if(visited[i][j] == false) {   //시간을 줄이기 위해 방문 안하곳만 가기 
+					dfs(i,j,check);
+				}
+				if(count>0) {
+					answer.put(check,answer.get(check) + (count*count));   // N^2
+				}
+				count =0;
+				
+			}
+		}
+	
+		System.out.println(answer.get("W")+" "+answer.get("B"));
+//----------------------------------------------------------------------------
+	}
+	public static void dfs(int n, int m, String check) {
+		visited[n][m] = true;	
+		count++;
+		for(int i =0; i<4 ; i++) {
+			int x= n+yArr[i];
+			int y= m+xArr[i];
+			
+			if(x > -1 && y >-1 && x <numY && y <numX && visited[x][y] == false ) {
+				if(maps[x][y].equals(check)) {
+					dfs(x,y,check);
+				}
+			}
+		}
+	}
+}
