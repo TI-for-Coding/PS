@@ -1,0 +1,57 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+   static List<Integer> danji = new ArrayList<Integer>();
+	    static int dongCount = 0;
+	    static int[][] maps;
+	    static int[] xArr = {-1,0,1,0};  //x좌표
+	    static int[] yArr = {0,-1,0,1};   //Y 좌표
+	    static int danjiCount = 0;
+	    
+	    public static void main(String[] args) throws IOException{
+	        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	        String str = br.readLine();
+	        dangiCount = Integer.parseInt(str);   // 단지 수 받기
+	        
+	        maps = new int[danjiCount][danjiCount];
+	        
+	        for(int i = 0; i<danjiCount; i++){
+	            str = br.readLine();
+	            
+	            for(int j=0; j<danjiCount; j++) {
+	            	maps[i][j] = Integer.parseInt(str.split("")[j]);    // 한줄 입력값 나눠서 배열에 넣기
+	            }
+	        }
+	         for(int i=0; i<danjiCount; i++){
+	        	 for(int j =0; j<danjiCount; j++) {
+	                if(maps[i][j]==1){   //1일때 
+	                    dfs(i,j);   
+	                }
+	                if(dongCount>0){
+	                    danji.add(dongCount);   // 동?? 수 넣기
+	                    dongCount = 0; 
+	                }
+	            }
+	        }
+	        Collections.sort(danji);   // 오름차순
+	        System.out.println(danji.size());
+	        for(int i =0; i < danji.size(); i++){
+	           System.out.println(danji.get(i));
+	        }
+	    }
+	    
+	    public static void dfs(int i, int j){
+	        maps[i][j] = 0;
+	        dongCount++;
+	        for(int n = 0; n<4; n++){
+	            int x = i+xArr[n];    // 비교 좌표
+	            int y = j+yArr[n];
+	            if(x>-1 && y>-1 && x<danjiCount && y<danjiCount){
+	                if(maps[x][y] ==1){
+	                    dfs(x,y);
+	                }
+	            }
+	        }
+	    }
+	}
