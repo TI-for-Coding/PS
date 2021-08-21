@@ -1,0 +1,85 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+   static List<Integer> danji = new ArrayList<Integer>();
+	    static int dongCount = 0;
+	    static int[][] maps;
+	    static int[] xArr = {-1,0,1,0};  //x좌표
+	    static int[] yArr = {0,-1,0,1};   //Y 좌표
+	    static int danjiCount = 0;
+        static Queue<int[]>que = new LinkedList<>();
+        static boolean[][] visited;
+	    
+	    public static void main(String[] args) throws IOException{
+	        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	        String str = br.readLine();
+	        dangiCount = Integer.parseInt(str);   // 단지 수 받기
+	        
+	        maps = new int[danjiCount][danjiCount];
+	        visited = new boolean[dangiCount][dangiCount];
+
+	        for(int i = 0; i<danjiCount; i++){
+	            str = br.readLine();
+	            
+	            for(int j=0; j<danjiCount; j++) {
+	            	maps[i][j] = Integer.parseInt(str.split("")[j]);    // 한줄 입력값 나눠서 배열에 넣기
+	            }
+	        }
+	         for(int i=0; i<danjiCount; i++){
+	        	 for(int j =0; j<danjiCount; j++) {
+	                if(maps[i][j]==1){   //1일때 
+	                   // dfs(i,j);
+                       bfs(i,j);
+                       dangi.add(dongCount);
+                       dongCount = 0;   
+	                }
+	            }
+	        }
+	        Collections.sort(danji);   // 오름차순
+	        System.out.println(danji.size());
+	        for(int i =0; i < danji.size(); i++){
+	           System.out.println(danji.get(i));
+	        }
+	    }
+	    
+	    public static void dfs(int i, int j){
+	        maps[i][j] = 0;
+	        dongCount++;
+	        for(int n = 0; n<4; n++){
+	            int x = i+xArr[n];    // 비교 좌표
+	            int y = j+yArr[n];
+	            if(x>-1 && y>-1 && x<danjiCount && y<danjiCount){
+	                if(maps[x][y] ==1){
+	                    dfs(x,y);
+	                }
+	            }
+	        }
+	    }
+        
+        public static void bfs(int i, int j){
+	        que.add(new int[]{i,j});    //que 에 값넣기
+            visited[i][j] = true;       //방문
+            dongCount = 0;
+            
+            while(!que.isEmpty()){
+                int curX = que.peek()[0];
+                int curY = que.peek()[1];
+                que.poll();
+                dongCount++;
+                
+                for(int n = 0; n<4; n++){
+                    int x = curX + xArr[n];
+                    int y = curY + yArr[n];
+                    
+                    if(x > -1 && y >-1 && x<dangiCount && y <dangiCount && visited[x][y]==false){
+                        if(maps[x][y]==1){
+                            que.add(new int[]{x,y});
+                            visited[x][y] = true;
+                        }
+                    }
+                }
+                
+            }
+	    }
+	}
