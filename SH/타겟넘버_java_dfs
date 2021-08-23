@@ -1,14 +1,23 @@
-class Solution {
-    public int solution(int[] numbers, int target) {
-        int answer =  DFS(numbers, target, 0, 0);
-        return answer;
-    }
-    public int DFS(int[] numbers, int target, int index, int num) {
-		if (index == numbers.length) {
-			return num == target ? 1 : 0;
-		} else {
-			return DFS(numbers, target, index + 1, num + numbers[index])
-					+ DFS(numbers, target, index + 1, num - numbers[index]);
-		}
-	}
-}
+ public static int solution(int[]numbers,int target) {
+	    	
+	    	dfs(numbers,target,0);  //0부터 시작하기
+	    	return answer;
+	    }
+	    public static void dfs(int[] numbers, int target,int idx){
+	        if(idx == numbers.length) {  //마지막 위치일때
+	        	int sum =0;
+	        	for(int i = 0; i<numbers.length; i++) {
+	        		sum += numbers[i];
+	        	}
+	        	
+	        	if(sum == target) {  //target 과 합계가 같을때
+	        		answer++;
+	        	}
+	        } else {
+	        	numbers[idx] *= 1;   //양수일때
+	        	dfs(numbers,target,idx+1); 
+	        	
+	        	numbers[idx] *= -1;  // 뒤부터 한자리씩 -로 변경
+	        	dfs(numbers,target,idx+1);
+	        }
+	    }
