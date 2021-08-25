@@ -1,0 +1,23 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int answer=0;
+
+void dfs(vector<int> numbers, int sum, int target, int n, int idx){
+    if(idx==n){
+        if(sum == target)
+            answer++;
+    }
+    else{
+        dfs(numbers, sum+numbers[idx], target, n, idx+1);
+        dfs(numbers, sum-numbers[idx], target, n, idx+1);
+    }
+}
+
+int solution(vector<int> numbers, int target) {
+    dfs(numbers, 0, target, numbers.size(), 0);
+    
+    return answer;
+}
