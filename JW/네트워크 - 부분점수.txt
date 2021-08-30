@@ -1,0 +1,60 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+/*
+단지의 갯수 구하면 될듯.
+1 1 0
+1 1 0
+0 0 1
+*/
+
+/*
+1 1 0
+1 1 1
+0 1 1
+*/
+int map[200][200];
+int dx[] = {0,0,-1,1};
+int dy[] = {1,-1,0,0};
+
+void dfs(int x, int y,  int n){
+    
+    map[x][y] = 0;
+    
+    for(int i=0; i<4; i++){
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+        
+        if(nx<0 || ny <0 || nx >= n || ny >= n || map[nx][ny] != 1) continue;
+        
+        dfs(nx,ny,n);
+    }
+    
+}
+int solution(int n, vector<vector<int>> computers) {
+    
+    int answer = 0;
+    vector<int> v;
+    
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            map[i][j] = computers[i][j];
+        }
+    }
+    
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            if(map[i][j] == 1){
+                answer = 0;
+                dfs(i,j,n);
+                answer++;
+                v.push_back(answer);
+            }
+            
+        }        
+    }
+    answer = v.size();
+    return answer;
+}
