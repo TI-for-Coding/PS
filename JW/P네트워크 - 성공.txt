@@ -12,9 +12,9 @@ int ans, N;
 void dfs(int node){
     
     visited[node] = true;
-    
+    // 2차원 배열의 단순 탐색이 아닌 그래프 형태의 경우 노드의 특정 인덱스를 방문체크 하면서 문제풀이를 진행해야 함 (암기)
     for(int i=0; i<N; i++){
-        if(map[node][i] == 1 && visited[i] == false){ // 노드인 경우 이런식으로 풀 수 있다. 단지랑 같은 방식인듯
+        if(map[node][i] == 1 && visited[i] == false){ 
             dfs(i);
         }
     }
