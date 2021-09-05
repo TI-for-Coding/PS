@@ -1,0 +1,67 @@
+#include <string>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+vector<vector<string>> map;
+vector<string> answer;
+vector<bool> visited;
+int N, tSize;
+
+void dfs(int idx, vector<string> ans, string str, int cnt){
+    
+    if(cnt == tSize){
+        answer = ans;
+        return;
+    }
+    
+    visited[idx] = true;
+    ans.push_back(str);
+    cnt = cnt + 1;
+    str = map[idx][1]; 
+    
+    for(int i=0; i<tSize; i++){        
+        if(visited[i] == false){
+            dfs(i,ans,str,cnt);            
+        }
+    }
+    
+    
+    
+}
+
+
+
+vector<string> solution(vector<vector<string>> tickets) {
+
+    
+    map = tickets;
+    tSize = tickets.size();
+    string start = "";
+    
+    sort(map.begin(), map.end());
+    
+    
+    for(int i=0; i<tSize; i++){
+        visited.push_back(false);
+        if(tickets[i][0] == "ICN") {
+            answer.push_back("ICN"); // answer에 "ICN" 추가
+            start = tickets[i][1]; // "ICN" 인 경우 도착지를 시작점으로 지정 예시 1의 경우 "JFK", 예시 2의 경우 "SFO"
+            visited.push_back(false); // "ICN" 의 경우 해당 vector에 false 셋팅
+        }
+    }
+    
+    
+    for(int i=0; i<tSize; i++){
+        if(tickets[i][0] == "ICN") continue;
+        
+        if(visited[i] == false){
+            dfs(i,answer,start,1);                        
+        }
+    }
+    
+    
+    return answer;
+}
