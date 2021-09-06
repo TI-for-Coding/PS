@@ -1,3 +1,4 @@
+// 일주일동안 못푸는중 머리 개썩음 
 #include <string>
 #include <vector>
 #include <iostream>
@@ -5,29 +6,39 @@
 
 using namespace std;
 
+
 vector<vector<string>> map;
 vector<string> answer;
-vector<bool> visited;
 int N, tSize;
+int visited[10000] = {false,};
 
-void dfs(int idx, vector<string> ans, string str, int cnt){
+
+void dfs(int idx, string str, int cnt){
     
-    if(cnt == tSize){
-        answer = ans;
+    
+    /*
+    
+    answer = "ICN"
+    */
+    if(cnt == tSize){        
         return;
     }
     
-    visited[idx] = true;
-    ans.push_back(str);
-    cnt = cnt + 1;
-    str = map[idx][1]; 
     
-    for(int i=0; i<tSize; i++){        
-        if(visited[i] == false){
-            dfs(i,ans,str,cnt);            
+    answer.push_back(str); // "ICN" INSERT
+    visited[idx] = true; // "ICN" 방문체크 
+    
+    
+    string start = "";
+    start = map[idx][1]; // 인천에서 도착지가 dfs 재귀호출할때 첫 출발지 이므로 이렇게..
+    
+    
+    for(int i=0; i<tSize; i++){
+        if(visited[i] == false && map[i][0] == start){
+            dfs(i,start,cnt+1);
         }
+        
     }
-    
     
     
 }
@@ -40,27 +51,27 @@ vector<string> solution(vector<vector<string>> tickets) {
     map = tickets;
     tSize = tickets.size();
     string start = "";
+    string end = "";
     
+    int startIdx = 0;
+    
+    // ticket 첫번째 index기준정렬
     sort(map.begin(), map.end());
     
+    start = "ICN";
+    end = map[tSize-1][1];
     
     for(int i=0; i<tSize; i++){
-        visited.push_back(false);
-        if(tickets[i][0] == "ICN") {
-            answer.push_back("ICN"); // answer에 "ICN" 추가
-            start = tickets[i][1]; // "ICN" 인 경우 도착지를 시작점으로 지정 예시 1의 경우 "JFK", 예시 2의 경우 "SFO"
-            visited.push_back(false); // "ICN" 의 경우 해당 vector에 false 셋팅
+        if(map[i][0] == start) {
+            startIdx = i;
+            break; // 시작점 정하기
         }
     }
     
     
-    for(int i=0; i<tSize; i++){
-        if(tickets[i][0] == "ICN") continue;
-        
-        if(visited[i] == false){
-            dfs(i,answer,start,1);                        
-        }
-    }
+    dfs(startIdx,start,0);                        
+    
+    answer.push_back(end);
     
     
     return answer;
