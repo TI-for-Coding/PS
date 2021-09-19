@@ -1,0 +1,96 @@
+import java.util.Stack;
+
+class Solution {
+    public String solution(int n, int k, String[] cmd) {
+
+		Stack<NodeData> backNode = new Stack<>();
+		NodeData root = new NodeData(0);
+		NodeData checkNode = root;
+
+		for (int i = 1; i < n; i++) {
+			NodeData node = new NodeData(i);
+			checkNode.next = node;
+			node.prev = checkNode;
+			checkNode = node;
+		}
+		NodeData tail = checkNode;  //서로 연결하는 형태
+		root.prev = tail; 
+		tail.next = root;
+		checkNode = root;
+        
+
+		while (k-- > 0) {
+			checkNode = checkNode.next;
+		}
+		
+		for (int i = 0; i < cmd.length; i++) {
+			String[] s = cmd[i].split(" ");
+			if (s.length == 1) {
+				if (s[0].equals("C")) {
+					checkNode.prev.next = checkNode.next;
+					checkNode.next.prev = checkNode.prev;
+					backNode.push(checkNode);
+         
+					if (checkNode == root) {
+						root = checkNode.next;
+						checkNode = root;  
+					}
+         
+                    else if (checkNode == tail) {
+						tail = curNode.prev;
+						curNode = tail;
+					}else {
+						checkNode = checkNode.next;
+					}
+				} else {
+					NodeData node = backNode.pop();
+					NodeData tmp = node.prev.next;
+					node.prev.next = node;
+					tmp.prev = node;
+
+					if(node.data < root.data)
+						root = node;
+					else if(node.data > tail.data)
+						tail = node;
+				}
+			} else {
+				int num = Integer.parseInt(s[1]);
+				if (s[0].equals("U")) {
+					while (num-- > 0) {
+						checkNode = checkNode.prev;
+					}
+				} else {
+					while (num-- > 0) {
+						checkNode = checkNode.next;
+					}
+				}
+			}
+		}
+		StringBuilder answer = new StringBuilder();
+		
+		for (int i = 0; i < n; i++) {
+			if(root.data == i) {
+				answer.append("O");
+				root=root.next;
+			}
+			else {
+				answer.append("X");
+			}
+		}
+        return answer.toString();
+
+	} 
+
+	static class NodeData {
+		NodeData prev;
+		NodeData next;
+		int data;
+
+		NodeData(int data) {
+			this.data = data;
+			prev = null;
+			next = null;
+		}
+	}
+
+}
