@@ -1,0 +1,48 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <iostream>
+
+using namespace std;
+
+int visited[10000] = {0,}; 
+vector<string> res; 
+
+bool dfs(string start, vector<vector<string>> tickets, int cnt){
+    
+    if(cnt == tickets.size()) return true;
+    
+    for(int i=0; i<tickets.size(); i++){
+        
+        if(visited[i] == 0 && start == tickets[i][0]){
+            visited[i] = 1;
+            res.push_back(tickets[i][1]);
+            bool chk = dfs(tickets[i][1], tickets, cnt+1);
+            if(chk) return true;
+            
+            visited[i] = false;
+        }
+    }
+    
+    res.pop_back();
+    return false;
+    
+    
+}
+
+
+vector<string> solution(vector<vector<string>> tickets) {
+    
+    vector<string> answer;
+    sort(tickets.begin(), tickets.end());
+    
+    string start = "ICN"; // 항상 "ICN" 공항에서 출발합니다.
+    res.push_back(start);
+    
+    //cout << tickets.size();
+    dfs(start,tickets,0);
+    
+    answer = res;
+    
+    return answer;
+}
