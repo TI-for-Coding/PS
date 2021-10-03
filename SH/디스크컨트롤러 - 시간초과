@@ -1,0 +1,33 @@
+class Solution {
+    static int answer = 1000000;
+    public int solution(int[][] jobs) {
+        int sum =0;
+        boolean[] check;
+        
+        for(int i =0; i<jobs.length;i++){
+            check = new boolean[jobs.length];
+            sum = jobs[i][0] + jobs[i][1];
+            check[i] = true;
+            dfs(check,jobs,sum,sum,0);
+        }
+        return answer/jobs.length;
+    }
+    
+    public void dfs(boolean[] check, int[][] jobs, int allSum, int sum, int cnt){
+        cnt ++;
+        for(int k =0; k<jobs.length;k++){
+            if(check[k] == false){
+                int allSum1 = allSum + jobs[k][1];
+                int sum1 = sum +(allSum1 - jobs[k][0]);
+                check[k]  = true;
+                dfs(check, jobs,allSum1, sum1,cnt);
+                check[k] = false;
+            }
+        }
+        if(cnt == jobs.length){
+            if(sum<answer){
+                answer = sum;
+            }
+        }
+    }
+}
