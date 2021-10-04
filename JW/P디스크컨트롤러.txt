@@ -1,0 +1,49 @@
+// 블로그 참고하여 풀이 (준우)
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <iostream>
+
+using namespace std;
+ 
+// 작업의 소요 시간이 짧은 순으로 정렬하기 위한 비교 구조체
+struct compare {
+    bool operator()(vector<int> a, vector<int> b) {
+        return a[1] > b[1];
+    }
+};
+ 
+int solution(vector<vector<int>> jobs) {
+    int answer = 0;
+    priority_queue<vector<int>, vector<vector<int>>, compare> pq;
+    
+    int cur_time = 0;   // 현재 시각
+    int idx = 0;   // 우선순위 큐에 들어간 작업의 개수
+    sort(jobs.begin(), jobs.end()); // a[][] 일때 앞 인덱스 기준으로 정렬하기 때문에 요청되는 시점으로 정렬이 됨.
+ 
+   // cout << jobs[0][1] << endl;
+    
+    
+    while (idx < jobs.size() || !pq.empty()) {
+        // 현재 수행할 수 있는 작업을 모두 우선순위 큐에 넣는다
+        if (idx < jobs.size() && jobs[idx][0] <= cur_time) {
+            pq.push(jobs[idx++]);
+            continue;
+        }
+ 
+        // 수행할 작업이 있는 경우
+        if (!pq.empty()) {
+            cur_time += pq.top()[1];
+            answer += cur_time - pq.top()[0]; // priority_que 사용법 https://blockdmask.tistory.com/107
+            pq.pop();
+        }
+        // 수행할 작업이 없는 경우
+        else {
+            // 다음 작업이 들어오는 시각으로 변경
+            cur_time = jobs[idx][0];
+        }
+    }  
+ 
+    return answer/jobs.size();  // 평균 시간 반환
+}
