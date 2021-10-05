@@ -1,3 +1,8 @@
+# 작성일 : 2021.10.05
+# 언어 : Python
+# 출처 : 프로그래머스 [코딩테스트 연습>힙(Heap)>더 맵게]
+# 메모 : 파이썬의 Heap 자료구조를 활용한 문제 해결.
+
 import heapq                # Heap 자료구조 호출
 
 def solution(scoville, K):
