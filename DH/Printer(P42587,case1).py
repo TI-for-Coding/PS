@@ -1,3 +1,8 @@
+# 작성일 : 2021.10.05
+# 언어 : Python
+# 출처 : 프로그래머스 [코딩테스트 연습>스택/큐>프린터]
+# 메모 : 파이썬 List 구조를 활용한 Queue 자료구조 구현
+
 def solution(priorities, location):
     
     answer, temp_max, val = 0, 0, 0     # 각각 최종값, 남은 작업 중 우선순위 최대값, 현재 작업대상의 우선순위값을 저장하는 변수
