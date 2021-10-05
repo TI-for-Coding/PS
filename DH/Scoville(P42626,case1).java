@@ -1,3 +1,9 @@
+/* 작성일 : 2021.10.05
+** 언어 : Java
+** 출처 : 프로그래머스 [코딩테스트 연습>힙(Heap)>더 맵게]
+** 메모 : 자바의 Queue 자료구조 패키지를 활용하여 문제 풀이
+*/
+
 import java.util.PriorityQueue;
 
 class Solution {
