@@ -1,3 +1,9 @@
+/* 작성일 : 2021.10.05
+** 언어 : Java
+** 출처 : 프로그래머스 [코딩테스트 연습>스택/큐>프린터]
+** 메모 : 자바 Queue 패키지를 활용한 풀이 및 Queue 구조의 최대값을 호출하는 메소드 활용
+*/
+
 import java.util.LinkedList;
 import java.util.Queue;
 
