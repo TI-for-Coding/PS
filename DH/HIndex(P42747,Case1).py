@@ -6,12 +6,12 @@
 
 def solution(citations):
     citations.sort()
-    citations.reverse()
+    citations.reverse()         # 최대 정렬
     answer = len(citations)
     while answer > 0 :
-        if citations[(answer - 1)] >= answer :
+        if citations[(answer - 1)] >= answer :  # H-Index 찾음
             break
         else :
-            answer = answer - 1
+            answer = answer - 1             
             continue
     return answer
