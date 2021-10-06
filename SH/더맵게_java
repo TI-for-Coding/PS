@@ -1,0 +1,22 @@
+import java.util.*;
+
+class Solution {
+    public int solution(int[] scoville, int K) {
+        PriorityQueue<Integer> scovilleQue = new PriorityQueue<>();
+        
+        for(int idx : scoville){
+            scovilleQue.offer(idx);
+        }
+        
+        int cnt =0;
+        while(scovilleQue.peek()<K){
+            if(scovilleQue.size() ==1){
+                return -1;
+            }else{
+                scovilleQue.offer(scovilleQue.poll()+ (scovilleQue.poll()*2));
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+}
