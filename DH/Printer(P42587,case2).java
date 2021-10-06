@@ -20,7 +20,7 @@ class Solution {
         Queue<Integer> queueIndexes = new LinkedList<Integer>();
         
         index = 0;
-        while (index < priorities.length) {
+        while (index < priorities.length) {             // 큐에 필요한 작업내역들을 저장
             queuePriorities.add(priorities[index]);
             queueIndexes.add(index);
             index++;
@@ -29,19 +29,19 @@ class Solution {
         index = 0;
         while (true) {
             
-            maxVal = max(queuePriorities);
-            val = queuePriorities.poll();
-            index = queueIndexes.poll();
+            maxVal = max(queuePriorities);      // 작업수행 시마다, 큐 내의 우선순위 최대값 저장
+            val = queuePriorities.poll();       // 프린트 대상을 pop
+            index = queueIndexes.poll();        // 프린트 대상의 위치 (Index) pop
             
-            if (maxVal == val) {
-                answer++;
-                if (index == location) {
+            if (maxVal == val) {                // 프린트 대상의 우선순위가 최대값이라면,
+                answer++;                       // 프린트 (time ++)
+                if (index == location) {        // 찾고자 하는 위치의 작업이었다면 종료
                     break;
-                } else {
+                } else {                        // 아니면 지속 수행
                     continue;
                 }
             } else {
-                queuePriorities.offer(val);
+                queuePriorities.offer(val);     // 프린트 대상의 우선순위가 최대값이 아니라면, 후순으로 push
                 queueIndexes.offer(index);
             }
             
@@ -49,7 +49,7 @@ class Solution {
         return answer;
     }
     
-    public static int max (Queue<Integer> queue) {
+    public static int max (Queue<Integer> queue) {      // 정수형 queue의 최대값을 찾는 매소드 
         int max = -1;
         for (int i = 0; i <= queue.size() - 1; i++) {
             if (max <= Integer.parseInt(queue.toArray()[i].toString())) {
