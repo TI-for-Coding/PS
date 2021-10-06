@@ -1,3 +1,9 @@
+# 작성일 : 2021.10.05
+# 언어 : Python
+# 출처 : 프로그래머스 [코딩테스트 연습>힙(Heap)>더 맵게]
+# 메모 : 파이썬의 리스트를 Queue 자료구조로 사용하였음.
+#       (파이썬 달다!)
+
 def solution(bridge_length, weight, truck_weights):
     
     answer = 0
