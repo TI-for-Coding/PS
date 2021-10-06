@@ -2,9 +2,9 @@
 ** 언어 : Java
 ** 출처 : 프로그래머스 [코딩테스트 연습>스택/큐>다리를 지나는 트럭]
 ** 메모 : 자바의 ArrayList를 활용한 Queue 구현. 
-         ArrayList에 특정 상수를 전체 더하는 addList(),
-         ArrayList를 전체 합산하는 sumList() 메소드를 선언하였음.
-         추후 Queue 자료형을 이용한 문제풀이를 해볼 예정입니다.
+**       ArrayList에 특정 상수를 전체 더하는 addList(),
+**       ArrayList를 전체 합산하는 sumList() 메소드를 선언하였음.
+**       추후 Queue 자료형을 이용한 문제풀이를 해볼 예정입니다.
 */
 
 import java.util.ArrayList;
