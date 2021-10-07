@@ -11,21 +11,21 @@ def solution(operations):
 
     heap = []
 
-    for ops in operations :
-        if ops[0] == "I" :
-            heapq.heappush(heap, int(ops[2:]))
-        elif len(heap) != 0 :
-            if ops[0:3] == "D 1" :
+    for ops in operations :                     # = 입력값을 순차적으로 연산
+        if ops[0] == "I" :                      # I는 힙 구조에 Push하는 연산
+            heapq.heappush(heap, int(ops[2:]))  
+        elif len(heap) != 0 :                   # D는 힙 구조에 데이터가 존재해야 작동함 (여기서 당황함)
+            if ops[0:3] == "D 1" :              # "D 1"은 힙 정렬상의 최대값을 Pop
                 heappop_max(heap)
-            elif ops[0:4] == "D -1" :
+            elif ops[0:4] == "D -1" :           # "D -1"은 힙 정렬상의 최소값을 Pop
                 heapq.heappop(heap)
 
-    if len(heap) == 0 :
+    if len(heap) == 0 :                
         value = [0, 0]
-    elif len(heap) == 1 :
-        value = [heap[0], heap[0]]
+    elif len(heap) == 1 :               
+        value = [heap[0], heap[0]]                          # len(heap) <= 1 의 경우는, 결과 상의 예외처리
     else :
-        value = [heappop_max(heap), heapq.heappop(heap)]
+        value = [heappop_max(heap), heapq.heappop(heap)]    # 최대값과 최소값이 명확히 존재하는 경우, 최대정렬힙과 최소정렬힙을 사용한 결과 출력
 
     return value
 
@@ -34,11 +34,11 @@ def heappop_max(minheap) :
     maxheap = []
     
     while len(minheap) != 0 :
-        heapq.heappush(maxheap, int(heapq.heappop(minheap)) * (-1))
+        heapq.heappush(maxheap, int(heapq.heappop(minheap)) * (-1))     # 최대정렬힙으로 전환 (음수 전환)
         
-    value = (-1) * heapq.heappop(maxheap)
+    value = (-1) * heapq.heappop(maxheap)                               # 최대정렬힙 상에서 Pop
     
     while len(maxheap) != 0 :
-        heapq.heappush(minheap, int(heapq.heappop(maxheap)) * (-1))
+        heapq.heappush(minheap, int(heapq.heappop(maxheap)) * (-1))     # 최소정렬힙으로 전환 (양수 전환)
 
     return value 
