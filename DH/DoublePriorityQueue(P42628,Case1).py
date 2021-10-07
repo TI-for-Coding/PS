@@ -5,8 +5,6 @@
 #       최대정렬 상에서 pop하는 로직은 메소드 heappop_max로 구현.
 #       근데 힙을 통한 방법이 아니었다면, 아마 이진탐색트리 정렬을 통해 풀려고 애쓰지 않았을까용?
 
-
-
 import heapq
 
 def solution(operations):
