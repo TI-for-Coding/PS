@@ -1,0 +1,55 @@
+/*
+채점 결과
+정확성: 57.1
+효율성: 23.8
+합계: 81.0 / 100.0
+*/
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+
+using namespace std;
+
+
+int solution(vector<int> scoville, int K) {
+    int answer = 0;
+    // Leo는 모든 음식의 스코빌 지수가 K 이상이 될 때까지 반복하여 섞습니다.
+    // 모든 음식의 스코빌 지수를 K 이상으로 만들 수 없는 경우에는 -1을 return 합니다.
+    priority_queue<int,vector<int>,greater<int>> pq;
+    
+    //priority_queue<int,vector<int>,greater<int>> cpy;
+    
+    for(int i=0; i<scoville.size(); i++){        
+        pq.push(scoville[i]);
+        //cpy.push(scoville[i]);
+    }
+    
+    
+    int cnt = 0;
+    while(!pq.empty() && pq.top() < K){
+        
+        int scv1 = pq.top();
+        pq.pop();
+        //cpy.pop();
+        
+        int scv2 = pq.top();
+        pq.pop();
+        //cpy.pop();
+        
+        
+        int newSc = scv1 + (scv2 * 2);
+        
+        pq.push(newSc);
+        cnt++;
+        
+    }
+    //bool chk = false;
+    //[5,3,9,10,12]
+        
+    answer = cnt;
+    
+    if(pq.top() < K) return -1;
+    else return answer; 
+    
+}
