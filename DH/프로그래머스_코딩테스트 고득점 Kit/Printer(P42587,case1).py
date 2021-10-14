@@ -20,7 +20,7 @@ def solution(priorities, location):
         val = priorities.pop(0)         # 현재 작업대상의 우선순위 저장
         idx = idxes.pop(0)              # 현재 작업대상의 기존 위치 저장
         
-        if val == temp_max :            #작업순위가 최대값일 경우 (
+        if val == temp_max :            #작업순위가 최대값일 경우
             answer = answer + 1
             if idx == location :        # 조회대상일 경우, break
                 break
