@@ -2,4 +2,4 @@
 문제를 찾으실 때 활용하기에 아주 유익할 듯 합니다 ^ㅅ^
 
 [인덱스 링크]
-https://blog.naver.com/sublime_94/222527936308
+https://blog.naver.com/PostList.naver?blogId=sublime_94&from=postList&categoryNo=50
