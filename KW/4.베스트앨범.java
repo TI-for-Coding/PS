@@ -3,6 +3,10 @@
 최대한 Stream을 이용하려하였으나, Stream api에 미숙하여..
 혹시 개선점을 발견하신다면, 말씀해주시면 감사하겠습니다.
 
+현재, 스트림은 두번 생기고 있습니다.
+1. 장르 내 재생횟수에 따른 줄세우기.
+2. 장르별 재생횟수에 따른 줄세우기.
+
  */
 
 
@@ -46,9 +50,9 @@ class Solution {
 
 
 class MusicRecord implements Comparable<MusicRecord>{
-    public final int index;
-    public final String genre;
-    public final int count;
+    private final int index;
+    private final String genre;
+    private final int count;
 
     MusicRecord(int index, String genre, int count) {
         this.index = index;
