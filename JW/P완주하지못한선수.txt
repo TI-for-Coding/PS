@@ -1,0 +1,46 @@
+/*완주하지못한선수*/
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <iostream>
+
+using namespace std;
+
+string solution(vector<string> participant, vector<string> completion) {
+    string answer = "";
+    
+    
+    // 1 8 9 3 2 참가자
+    // 1 3 2 8 완주자 
+    // 1 2 3 8 9
+    // 1 2 3 8
+    
+    // 1 2 2 3 8 9
+    // 2 2 3 8 9 
+    sort(participant.begin(), participant.end());
+    sort(completion.begin(), completion.end());
+    
+    int N = participant.size();
+    bool chk = false;
+    //cout << participant[N-1] << endl;
+    string answer1 = "";
+    string answer2 = "";
+    
+    for(int i=0; i<participant.size(); i++){
+        if(participant[i] != completion[i]){
+            answer1 = participant[i];
+            chk = true;
+            break;
+        }
+    }
+    
+    if(chk){
+        answer = answer1;
+        return answer;
+    }else{
+        answer2 = participant[N-1];
+        answer = answer2;
+        return answer;
+    }
+    
+}
