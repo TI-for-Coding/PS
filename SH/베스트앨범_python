@@ -1,0 +1,26 @@
+def solution(genres, plays):
+    genre_score = dict() 
+    chk = dict()
+    
+    for i in range(len(genres)):
+        genre_score[genres[i]] = genre_score.get(genres[i], 0) + plays[i]
+
+    for i in range(len(genres)):
+
+        chk[i] = [genre_score[genres[i]], plays[i]]
+
+    chk = sorted(chk.items(), key=lambda x: (x[1], -x[0]), reverse=True)
+
+    genre_score = sorted(genre_score.items(), key=lambda x:x[1], reverse=True)
+
+    start = 0
+    res = list()
+    for gs in genre_score:
+        cnt = 0
+        for i in range(start, len(chk)):
+            if chk[i][1][0] == gs[1] and cnt < 2:
+                start += 1
+                res.append(chk[i][0])
+                cnt += 1       
+
+    return res
