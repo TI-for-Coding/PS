@@ -1,7 +1,7 @@
 /*
 BFS와 DFS 방법을 모두 적어보려다보니, 중복되는 코드들이 생겨서, template-callback 을 적용하였습니다.
-중복되는 메소드는 template으로,
-변경되는 메소드(dfs, bfs)는 funtional interface로,
+중복되는 코드는 template으로,
+변경되는 코드(dfs, bfs)는 funtional interface로,
 하여 작성하였습니다.
 
 혹시나, 보시는 분께 제가 도움이 될 수 있을까 하여..
@@ -13,13 +13,9 @@ import java.util.Arrays;
 class Solution {
     public int solution(int n, int[][] computers) {
 
-        // BFS
-//        TraverseAlgorithm bfs = getBFS();
-//        return traverseTemplate(n, computers, bfs);
-
-        //DFS
-        TraverseAlgorithm dfs = getDFS();
-        return traverseTemplate(n, computers, dfs);
+//        TraverseAlgorithm algo = bfs();       //BFS
+        TraverseAlgorithm algo = dfs();         //DFS
+        return traverseTemplate(n, computers, algo);
     }
 
     private int traverseTemplate(int n, int[][] computers, TraverseAlgorithm algorithm) {
@@ -38,7 +34,7 @@ class Solution {
         return count;
     }
 
-    private TraverseAlgorithm getDFS() {
+    private TraverseAlgorithm dfs() {
 
         return new TraverseAlgorithm() {
             @Override
@@ -51,7 +47,7 @@ class Solution {
         };
     }
 
-    private TraverseAlgorithm getBFS() {
+    private TraverseAlgorithm bfs() {
 
         return new TraverseAlgorithm() {
             @Override
