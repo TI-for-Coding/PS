@@ -9,6 +9,9 @@ BFS와 DFS 방법을 모두 적어보려다보니, 중복되는 코드들이 생
  */
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 class Solution {
     public int solution(int n, int[][] computers) {
@@ -48,13 +51,19 @@ class Solution {
     }
 
     private TraverseAlgorithm bfs() {
-
         return new TraverseAlgorithm() {
             @Override
             public void doTraverse(int node, int[][] link, boolean[] visited) {
+                Queue<Integer> q = new LinkedList<>(List.of(node));
                 visited[node] = true;
-                for (int computer = 0; computer < visited.length; computer++) {
-                    if(!visited[computer] && link[node][computer] == 1) doTraverse(computer, link, visited);
+                while(!q.isEmpty()){
+                    int curr = q.poll();
+                    for (int computer = 0; computer < visited.length; computer++) {
+                        if(!visited[computer] && link[curr][computer] == 1){
+                            visited[computer] = true;
+                            q.add(computer);
+                        }
+                    }
                 }
             }
         };
