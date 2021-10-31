@@ -23,8 +23,7 @@ class Solution {
 
     private int traverseTemplate(int n, int[][] computers, TraverseAlgorithm algorithm) {
         boolean[] visited = new boolean[n];
-        Arrays.fill(visited, false);
-
+        
         int count = 0;
 
         for (int i = 0; i < n; i++) {
