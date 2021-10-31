@@ -8,7 +8,7 @@ from collections import deque
 def dfs(graph, root):       # 깊이우선탐색 (Depth First Search, DFS)
 
     visited = []
-    stack = [root]          # stack 자료구
+    stack = [root]          # stack 자료구조
 
     while stack:
 
