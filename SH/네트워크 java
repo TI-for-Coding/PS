@@ -1,0 +1,24 @@
+class Solution {
+    
+    public int solution(int n, int[][] computers) {
+        int answer = 0;
+        boolean[] check = new boolean[n];
+        
+        for(int i =0; i<n; i++){
+            if(check[i] == false){
+                answer++;
+                dfs(i, computers,check);
+            }
+        }
+        return answer;
+    }
+    
+    public void dfs(int node, int[][] computers, boolean[] check){
+        check[node] =true;
+        for(int i =0; i<computers.length;i++){
+            if(computers[node][i] == 1 && check[i]==false){
+                dfs(i,computers,check);
+            }
+        }
+    }
+}
