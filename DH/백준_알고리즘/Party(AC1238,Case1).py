@@ -31,7 +31,7 @@ for i in range(1, N + 1):                   # 마을 순서대로 다익스트�
 
         cum_time, end = heapq.heappop(queue)
 
-        if distance_list[i][end] < cum_time:    # 해당 노드가 이미 처리되었다면 무시
+        if distance_list[i][end] < cum_time:    # 현재 최단경로에 비해 가중치가 더 큰 경우에는 조회할 필요 없음 
             continue
 
         for target in route_graph[end]:         # 해당 노드에 포함되어 있는 모든 경로를 조회
