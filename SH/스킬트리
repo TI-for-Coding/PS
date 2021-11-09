@@ -1,0 +1,20 @@
+class Solution {
+    public int solution(String skill, String[] skill_trees) {
+        int answer = 0;
+        
+        for (int i =0; i< skill_trees.length;i++) {
+            String tmpSkill = skill_trees[i];
+            
+            for (int l = 0; l < skill_trees[i].length(); l++) {
+                String s = skill_trees[i].substring(l, l+1);
+                if (!skill.contains(s)) {
+                    tmpSkill = tmpSkill.replace(s, "");                 }
+            }
+            
+            if (skill.indexOf(tmpSkill) == 0)
+                answer++;
+        }
+ 
+        return answer;
+    }
+}
