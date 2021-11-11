@@ -1,0 +1,30 @@
+class Solution
+{
+    public int solution(String s)
+    {
+        int cnt = 0;
+    	boolean check = true;
+    	int i =0;
+    	while(check) {
+    		String[] str = s.split("");
+    		if(str.length>i+1) {
+    			if(str[i].equals(str[i+1])) {
+    				String tmp = s.substring(i,i+2);
+    				s= s.replace(tmp, "");
+    				i =0;
+    			}else {
+    				i++;
+    			}
+    		}else if(s.length() ==0) {
+    			cnt = 1;
+    			check = false;
+    		}else if(str.length ==i+1) {
+    			check = false;
+    			cnt =0;
+    		}else {
+    			i=0;
+    		}
+    	}
+    	return cnt;
+    }
+}
