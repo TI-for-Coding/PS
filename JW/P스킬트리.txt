@@ -1,0 +1,49 @@
+// 스킬트리. 20211113
+#include <cstdio>
+#include <string>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+int solution(string skill, vector<string> skill_trees) {
+
+    int answer = skill_trees.size();
+    
+    
+    for(int i=0; i<skill_trees.size(); i++){
+        
+        queue<char> que;
+        
+        for(int j=0; j<skill.size(); j++){
+            que.push(skill[j]);             
+        }
+        
+        
+        string compare = skill_trees[i]; // "BACDE"
+        
+        
+        for(int k = 0; k < compare.size(); k++){
+            
+            char t = compare[k]; // B
+            
+            int chk = skill.find(t);
+            
+            
+            if(chk != -1){
+                
+                if(que.size() != 0 && que.front() == t){
+                    que.pop();
+                }else{
+                    answer--; // answer의 갯수를 줄여나가면서 해결.
+                    break;
+                }
+                
+            }
+            
+            
+        }
+        
+    }
+    return answer;
+}
