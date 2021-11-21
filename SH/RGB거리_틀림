@@ -1,0 +1,54 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+  
+	static int[][] arr;
+	static int result=0;
+	
+    public static void main(String[] args) throws IOException  {
+    	
+
+    	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    	int numOfHouse = Integer.parseInt(br.readLine());
+    	arr= new int[numOfHouse][3];
+    
+    	for(int i = 0; i<numOfHouse; i++) {
+    		String str = br.readLine();
+    		arr[i][0]= Integer.parseInt(str.split(" ")[0]);//red
+    		arr[i][1]= Integer.parseInt(str.split(" ")[1]);//green
+    		arr[i][2]= Integer.parseInt(str.split(" ")[2]);//blue
+    	}
+    	int[] houseArr = {arr[0][0],arr[0][1],arr[0][2]};
+    	solution(houseArr,0);
+    	System.out.println("result : "+result);  
+    }
+    
+    public static void solution(int[] houseArr, int curNum) {
+    	
+
+    	
+    	int minNum = Math.min(houseArr[0], Math.min(houseArr[1],houseArr[2]));
+    	result += minNum; 
+    	System.out.println(houseArr[0]+" "+ houseArr[1]+" "+houseArr[2]); 
+    	System.out.println("min : "+minNum +" result : "+result);
+  
+    	curNum++;
+    	if(curNum < arr.length) {
+	    	if(minNum == houseArr[0]) {
+	    		int [] temp = {1001, arr[curNum][1],arr[curNum][2]};
+	    		solution(temp,curNum);
+	    	}else if(minNum == houseArr[1]) {
+	    		int [] temp = {arr[curNum][0], 1001,arr[curNum][2]};
+	    		solution(temp,curNum);
+	    	}else if(minNum == houseArr[2]) {
+	    		int [] temp = {arr[curNum][0], arr[curNum][1],1001};
+	    		solution(temp,curNum);
+	    	}
+    	}
+    	
+    }
+
+   
+}
