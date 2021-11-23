@@ -1,0 +1,42 @@
+// 가장 큰 수 -- 푸는중 테스트 케이스만 통과 
+/*
+채점 결과
+정확성: 93.3
+합계: 93.3 / 100.0
+*/
+#include <string>
+#include <vector>
+#include <algorithm>
+
+
+using namespace std;
+/*
+정답이 너무 클 수 있으니 문자열로 바꾸어 return 합니다.
+*/
+bool comp(string str1, string str2){
+    if(str1 + str2 > str2 + str1) return true;
+    else return false;
+}
+
+
+string solution(vector<int> numbers) {
+    string answer = "";
+
+    vector<string> vStr;
+    
+    // 문자열로 변환해서 벡터에 담기
+    for(int i=0; i<numbers.size(); i++){
+        vStr.push_back(to_string(numbers[i]));
+    }
+    
+    // 6,2 와 2,6 비교 "26" "62"
+    sort(vStr.begin(),vStr.end(),comp);
+    
+    // 결과문자열에 받아서 return
+    for(int i=0; i < vStr.size(); i++){
+        answer += vStr[i];
+    }
+    
+    
+    return answer;
+}
