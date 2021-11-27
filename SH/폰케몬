@@ -1,0 +1,24 @@
+import java.io.IOException;
+import java.util.ArrayList;
+
+class Solution {
+    public int solution(int[] nums) {
+        int answer = 0;
+       
+       ArrayList<Integer> arrayList = new ArrayList<>();
+       
+       for(int item : nums) {
+    	   if(!arrayList.contains(item)) {
+    		   arrayList.add(item);
+    	   }
+       }
+       int cnt = nums.length/2;
+       if(arrayList.size() < cnt) {
+    	answer = arrayList.size();   
+       }else if(arrayList.size() >= cnt) {
+    	   answer = cnt;
+       }
+            
+       return answer;    
+    }
+}
